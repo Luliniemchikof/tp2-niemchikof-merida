@@ -19,7 +19,9 @@
         </header>
         <main class="texto">
 
-          <?php include  ("formulario.php");
+          <?php 
+        
+          include ("formulario.php");
           ?>
 
 

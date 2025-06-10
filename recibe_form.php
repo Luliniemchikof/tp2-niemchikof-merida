@@ -23,44 +23,57 @@ if (!empty($errores)) {
 
 
 //Recorre array de campos para ver los datos recibidos
-echo "<h2>Datos recibidos:</h2>";
-for ($i = 0; $i < count($campos); $i++) {
-    $campo = $campos[$i];
-    if (!empty($_POST[$campo])) {
-        echo "<p><strong>$campo:</strong> " . $_POST[$campo] . "</p>";
-    }
-}
+//echo "<h2>Datos recibidos:</h2>";
+//for ($i = 0; $i < count($campos); $i++) {
+ //   $campo = $campos[$i];
+//    if (!empty($_POST[$campo])) {
+//        echo "<p><strong>$campo:</strong> " . $_POST[$campo] . "</p>";
+//    }
+//}
 
 //Recorre el array de campos claves
-for ($i = 0; $i < count($campos_clave); $i++) {
-    if (empty($_POST[$campos_clave[$i]])) {
+for ($i = 0; $i < count($campos); $i++) {
+    if (empty($_POST[$campos[$i]])) {
         $faltan_datos = true;
         break; // con que uno esté vacío, ya alcanza
     }
 }
 
 if (
-    $_POST["divas"] === "Ninguno" &&
-    $_POST["peliculas"] === "Ninguno" &&
-    $_POST["argentina"] === "no" &&
-    $_POST["deGrande"] === "No se qué es"
+    $_POST["musica"] === "si" &&
+    $_POST["divas"] === "1" &&
+    $_POST["peliculas"] === "1" &&
+    $_POST["peliculas"] === "1" &&
+    $_POST["argentina"] === "si" &&
+    $_POST["deGrande"] === "1"
 ) {
-    echo "<p><strong>¡Ha salvado a 0 niños del Chaco y seguro sea zurd0000000!</strong></p>\n";
+    echo "<p><strong>¡Sus rinstones están listos en <a>https://drive.google.com/drive/folders/10aIMT68tVvlS-NX-Me10_UxbFqJjdeGm</a>!</strong></p>\n";
 } 
 else if (
-    $_POST["divas"] === "Más de 10000usd" &&  // Asegurate que el value en el select coincida con esto
-    $_POST["peliculas"] === "La casa de Lali" &&
-    $_POST["argentina"] === "si" &&
-    $_POST["deGrande"] === "Re de acuerdo"
+     $_POST["musica"] === "si" &&
+    $_POST["divas"] === "2" &&
+    $_POST["peliculas"] === "2" &&
+    $_POST["peliculas"] === "2" &&
+    $_POST["argentina"] === "no" &&
+    $_POST["deGrande"] === "2"
 ) {
-    echo "<p><strong>¡Ha salvado a INCONTABLES niños del Chaco!</strong></p>\n";
-} else if ($faltan_datos) {
-    echo "<p><strong>No se puede determinar su grado de heroísmo hacia los niños del Chaco porque faltan datos.</strong></p>\n";
+    echo "<p><strong>¡Sus rinstones están listos en <a>https://drive.google.com/drive/folders/15CxS6QdbXv5CPOAR_P5QvEjUsNCAXb_5</a>!</strong></p>\n";
+} else if (
+    $_POST["musica"] === "no" &&
+    $_POST["divas"] === "3" &&
+    $_POST["peliculas"] === "3" &&
+    $_POST["peliculas"] === "3" &&
+    $_POST["argentina"] === "si" &&
+    $_POST["deGrande"] === "3"
+) {
+    echo "<p><strong>¡Sus rinstones están listos en <a>https://drive.google.com/drive/folders/1zTVCNl1DMyRB1QmOEDW1Bv_2Vr0tGR2U</a>!</strong></p>\n";
+}else if ($faltan_datos) {
+    echo "<p><strong>No se pueden proveer ringtones porque faltan datos</strong>\n";
 }
 else {
-    echo "<p><strong> Salvó a varios niños del Chaco, pero podría haber salvado más.</strong></p>\n";
+    echo "<p><strong>Sus datos están en proceso</strong></p>\n";
 }
 
-echo "<a href='formulario.php'>volver</a>";
+echo "<a href='index.php'>volver</a>";
 
 ?>

@@ -48,12 +48,12 @@
             <hr>
 
             <div>
-                <label for="peliculas">¿Qué tipo de películas miras?</label><br>
+                <label for="peliculas">¿Qué tipo de películas mira?</label><br>
                 <select name="peliculas" id="peliculas" required>
                     <option value="">Seleccione una opción</option>
                     <option value="1">Cualquiera mientras sea buena, joder esto si es cine</option>
-                    <option value="2">Terror o acción</option>
-                    <option value="3">Amor o comedia *suspiro*</option>
+                    <option value="2">Amor o comedia *suspiro*</option>
+                    <option value="3">Terror o acción</option>
                 </select>
         
             </div>
