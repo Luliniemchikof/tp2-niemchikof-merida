@@ -1,4 +1,4 @@
-ody{
+body{
     background-color: rgb(0, 0, 0);
     box-sizing: border-box;
     margin: 0;
@@ -76,6 +76,7 @@ label{
 hr{
     color: black;
 }
+
 
 @media (max-width:768px){
     .texto{

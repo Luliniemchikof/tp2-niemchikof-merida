@@ -2,38 +2,23 @@
 
 
 //arrays para validar los campos
-$campos = ["nombre", "ciudadano", "dolares", "cultura_cierre", "organo", "filosofia"];
-$campos_clave = ["dolares", "cultura_cierre", "organo", "filosofia"];
-$faltan_datos = false;
+$campos = ["nombre", "apellido", "musica", "divas", "peliculas", "influencer", "argentina", "deGrande", "facturas"];
+$errores = [];
+$valores = [];
 
-// Valida el nombre
-if (empty($_POST["nombre"])) {
-    echo "<p>Debe escribir su nombre. </p>\n";
+
+foreach ($campos as $campo) {
+    $valor = isset($_POST[$campo]) ? trim($_POST[$campo]) : '';
+    $valores[$campo] = $valor;
+
+    if ($valor === '') {
+        $errores[$campo] = "El campo '$campo' es obligatorio.";
+    }
 }
 
-// Valida la pregunta sobre ciudadano
-if (empty($_POST["ciudadano"])) {
-    echo "<p>Debe seleccionar si es ciudadano de bien.</p>\n";
-}
-
-// Valida la cantidad de dólares
-if (empty($_POST["dolares"])) {
-    echo "<p>Debe elegir cuántos dólares compró.</p>\n";
-}
-
-// Valida cultura_cierre
-if (empty($_POST["cultura_cierre"])) {
-    echo "<p>Debe seleccionar un espacio cultural.</p>\n";
-}
-
-// Valida si vendió un órgano
-if (empty($_POST["organo"])) {
-    echo "<p>Debe seleccionar si vendió un órgano.</p>\n";
-}
-
-// Valida filosofía
-if (empty($_POST["filosofia"])) {
-    echo "<p>Debe elegir una opción sobre la filosofía.</p>\n";
+if (!empty($errores)) {
+    include 'index.php';
+    exit;
 }
 
 
@@ -55,18 +40,18 @@ for ($i = 0; $i < count($campos_clave); $i++) {
 }
 
 if (
-    $_POST["dolares"] === "Ninguno" &&
-    $_POST["cultura_cierre"] === "Ninguno" &&
-    $_POST["organo"] === "no" &&
-    $_POST["filosofia"] === "No se qué es"
+    $_POST["divas"] === "Ninguno" &&
+    $_POST["peliculas"] === "Ninguno" &&
+    $_POST["argentina"] === "no" &&
+    $_POST["deGrande"] === "No se qué es"
 ) {
     echo "<p><strong>¡Ha salvado a 0 niños del Chaco y seguro sea zurd0000000!</strong></p>\n";
 } 
 else if (
-    $_POST["dolares"] === "Más de 10000usd" &&  // Asegurate que el value en el select coincida con esto
-    $_POST["cultura_cierre"] === "La casa de Lali" &&
-    $_POST["organo"] === "si" &&
-    $_POST["filosofia"] === "Re de acuerdo"
+    $_POST["divas"] === "Más de 10000usd" &&  // Asegurate que el value en el select coincida con esto
+    $_POST["peliculas"] === "La casa de Lali" &&
+    $_POST["argentina"] === "si" &&
+    $_POST["deGrande"] === "Re de acuerdo"
 ) {
     echo "<p><strong>¡Ha salvado a INCONTABLES niños del Chaco!</strong></p>\n";
 } else if ($faltan_datos) {
