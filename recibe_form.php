@@ -1,6 +1,5 @@
 <?php
 
-
 //arrays para validar los campos
 $campos = ["nombre", "apellido", "musica", "divas", "peliculas", "influencer", "argentina", "deGrande", "facturas"];
 $errores = [];
@@ -47,7 +46,7 @@ if (
     $_POST["argentina"] === "si" &&
     $_POST["deGrande"] === "1"
 ) {
-    echo "<p><strong>¡Sus rinstones están listos en <a>https://drive.google.com/drive/folders/10aIMT68tVvlS-NX-Me10_UxbFqJjdeGm</a>!</strong></p>\n";
+    echo "<p><strong>¡Sus rinstones están listos en <a href="https://drive.google.com/drive/folders/10aIMT68tVvlS-NX-Me10_UxbFqJjdeGm">Aquí!</a>!</strong></p>\n";
 } 
 else if (
      $_POST["musica"] === "si" &&
@@ -57,7 +56,7 @@ else if (
     $_POST["argentina"] === "no" &&
     $_POST["deGrande"] === "2"
 ) {
-    echo "<p><strong>¡Sus rinstones están listos en <a>https://drive.google.com/drive/folders/15CxS6QdbXv5CPOAR_P5QvEjUsNCAXb_5</a>!</strong></p>\n";
+    echo "<p><strong>¡Sus rinstones están listos en <a href="https://drive.google.com/drive/folders/15CxS6QdbXv5CPOAR_P5QvEjUsNCAXb_5">Ringtone 2</a>!</strong></p>\n";
 } else if (
     $_POST["musica"] === "no" &&
     $_POST["divas"] === "3" &&
@@ -66,7 +65,7 @@ else if (
     $_POST["argentina"] === "si" &&
     $_POST["deGrande"] === "3"
 ) {
-    echo "<p><strong>¡Sus rinstones están listos en <a>https://drive.google.com/drive/folders/1zTVCNl1DMyRB1QmOEDW1Bv_2Vr0tGR2U</a>!</strong></p>\n";
+    echo "<p><strong>¡Sus rinstones están listos en <a href="https://drive.google.com/drive/folders/1zTVCNl1DMyRB1QmOEDW1Bv_2Vr0tGR2U">Ringtone 3</a>!</strong></p>\n";
 }else if ($faltan_datos) {
     echo "<p><strong>No se pueden proveer ringtones porque faltan datos</strong>\n";
 }

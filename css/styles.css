@@ -1,0 +1,158 @@
+body{
+    background-color: black;
+    background-image: url(../media/fondo.gif);
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    line-height: 2.4em;
+    background-color: black;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 100;
+    font-style:normal;
+}
+
+.texto{
+    width: 90%;
+    background-image: url(../img/milei.png);
+    border: .1em dashed rgb(129, 129, 44);
+    margin: 2em;
+    padding: 2em;
+    color: pink;
+    text-indent: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: justify;
+
+}
+header{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .5em;
+}
+header div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+ul li{
+    padding: 1em;
+    list-style-type: none;
+}
+ul li a{
+    text-decoration: none;
+    color: pink;
+}
+img{
+    width: 15%;
+}
+h1{
+    color: rgb(246, 248, 131);
+    text-align: center;
+    padding-top:1em;
+    display: inline;
+
+}
+h2{
+    text-align: center;
+    color: rgb(78, 195, 224);
+    margin: 1em;
+}
+form{
+    background-color: rgb(131, 248, 242);
+    width: 60%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 2.5em;
+    border: .2em solid rgb(230, 227, 95);
+}
+form div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1em;
+}
+#enviarButton{
+    display: block;
+    align-self: center;
+}
+.button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+label{
+    color: black;
+}
+hr{
+    color: rgb(68, 67, 67);
+}
+a{
+    color: rgb(133, 62, 101);
+}
+a:hover{
+    color: rgb(80, 28, 52);
+}
+a:active{
+    color: aqua;
+}
+
+.button-encuesta{
+    display: block;
+    font-weight: 60;
+    width: 50%;
+    padding: .3em;
+    margin: 3em;
+    background-color: pink;
+    box-shadow: 0px 0px 10px rgb(165, 129, 135);
+    border-radius: 1em;
+}
+.button-encuesta:hover{
+   
+}
+
+@media (max-width:768px){
+    .texto{
+        width: 100%;
+        margin: 0;
+        background-size: cover;
+        background-position: 30%;
+    }
+    form{
+        background-color: rgb(246, 248, 131);
+        width: 90%;
+        padding: 1em;
+        margin: .5em;
+        border: 0;
+    }
+   
+    img{
+        width:20%;
+    }
+
+}
