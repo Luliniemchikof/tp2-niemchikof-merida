@@ -7,12 +7,11 @@ if ($resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {
         echo "Nombre: " . $fila["nombre"] . "<br>";
         echo "Apellido: " . $fila["apellido"] . "<br>";
-        echo "Resultado: " . $fila["resultado"] . "<br><br>";
+        echo "Resultado: " . $fila["Resultado"] . "<br><br>";
     }
 } else {
     echo "No se encontraron resultados.";
 }
-
 
 //Que muestre los valores de la base de datos 
 
