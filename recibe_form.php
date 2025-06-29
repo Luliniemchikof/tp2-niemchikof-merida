@@ -5,16 +5,16 @@ require_once 'conexion.php';
 
 if ($resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {
-        echo "ID: " . $fila[""] . "<br>";
         echo "Nombre: " . $fila["nombre"] . "<br>";
-        echo "Email: " . $fila["email"] . "<br><br>";
+        echo "Apellido: " . $fila["apellido"] . "<br>";
+        echo "Resultado: " . $fila["resultado"] . "<br><br>";
     }
 } else {
     echo "No se encontraron resultados.";
 }
 
 
-//
+//Que muestre los valores de la base de datos 
 
 //arrays para validar los campos
 $campos = ["nombre", "apellido", "musica", "divas", "peliculas", "influencer", "argentina", "deGrande", "facturas"];
