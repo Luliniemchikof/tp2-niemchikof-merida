@@ -3,7 +3,7 @@
 $host = 'localhost';
 $user = 'root';
 $password = '';
-$database = 'nombre_de_tu_base';
+$database = 'ringtones';
 
 $conn = new mysqli($host, $user, $password, $database);
 
