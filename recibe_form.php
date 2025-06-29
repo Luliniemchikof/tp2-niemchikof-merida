@@ -19,7 +19,22 @@ if ($resultado->num_rows > 0) {
 $campos = ["nombre", "apellido", "musica", "divas", "peliculas", "influencer", "argentina", "deGrande", "facturas"];
 $errores = [];
 $valores = [];
+$Faltan = [];
 
+foreach ($campos as $c) {
+  if (!isset($_POST[$c]) || $_POST[$c] === '') {
+    $faltan[] = $c;
+  }
+}
+
+if (count($faltan) > 0) {
+  echo "Por favor completá los siguientes campos: " . implode(", ", $faltan);
+  exit;
+}
+
+// Aquí, ya están todos completados
+echo "Gracias por contestar la encuesta.";
+// ...procesá las respuestas como quieras...
 
 foreach ($campos as $campo) {
     $valor = isset($_POST[$campo]) ? trim($_POST[$campo]) : '';
