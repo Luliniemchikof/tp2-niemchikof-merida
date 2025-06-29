@@ -1,14 +1,18 @@
 <?php
-
+  
 require_once 'conexion.php';
 //Para conectarnos con la base de datos
 
-$sql = "SELECT * FROM preguntas";
-$resultado = $conn->query($sql);
-
-while ($fila = $resultado->fetch_assoc()) {
-    echo $fila['texto'];
+if ($resultado->num_rows > 0) {
+    while ($fila = $resultado->fetch_assoc()) {
+        echo "ID: " . $fila[""] . "<br>";
+        echo "Nombre: " . $fila["nombre"] . "<br>";
+        echo "Email: " . $fila["email"] . "<br><br>";
+    }
+} else {
+    echo "No se encontraron resultados.";
 }
+
 
 //
 
