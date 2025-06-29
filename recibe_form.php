@@ -1,5 +1,16 @@
 <?php
 
+require_once 'conexion.php';
+//Para conectarnos con la base de datos
+
+$sql = "SELECT * FROM preguntas";
+$resultado = $conn->query($sql);
+
+while ($fila = $resultado->fetch_assoc()) {
+    echo $fila['texto'];
+}
+
+//
 
 //arrays para validar los campos
 $campos = ["nombre", "apellido", "musica", "divas", "peliculas", "influencer", "argentina", "deGrande", "facturas"];
