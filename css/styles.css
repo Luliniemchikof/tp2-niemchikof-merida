@@ -133,7 +133,7 @@ a:active{
     border-radius: 1em;
 }
 .button-encuesta:hover{
-   
+   padding: .2em;
 }
 
 @media (max-width:768px){

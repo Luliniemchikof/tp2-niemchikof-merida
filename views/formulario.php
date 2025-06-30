@@ -11,7 +11,7 @@
             <hr>
 
             <div>
-                <label for="nombre">Su apellido:</label><br>
+                <label for="apellido">Su apellido:</label><br>
                 <input type="text" name="apellido" id="apellido" placeholder="Ingresá tu apellido" required>
                 <div class="invalid-feedback">Debe escribir su apellido</div>
 
