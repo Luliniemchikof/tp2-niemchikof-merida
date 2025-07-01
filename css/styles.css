@@ -9,6 +9,11 @@ body{
     flex-wrap: wrap;
     
 }
+
+.button-encuesta{
+    display: ruby-base-container
+}
+
 .contenedor{
     display: flex;
     flex-direction: column;
