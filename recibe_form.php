@@ -1,28 +1,23 @@
 <?php
 
-require_once 'conexion.php';  // Conecta cn la BD
+require_once 'conexion.php';  // Conecta con la BD
 
-if (isset($_POST['submit'])) {
-    // Guardar respuesta (ajustá los campos según tu base)
-    $respuesta = $_POST['respuesta']; // ejemplo
-    $sql = "INSERT INTO respuestas (respuesta) VALUES (?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $respuesta);
-    $stmt->execute();
-    echo "Respuesta guardada correctamente.";
-}
 
-elseif (isset($_POST['delete_last'])) {
-    // Eliminar la última entrada (la de mayor ID)
-    $sql = "DELETE FROM respuestas ORDER BY id DESC LIMIT 1";
-    if ($conn->query($sql)) {
-        echo "Última entrada eliminada correctamente.";
+//Condicional para eliminar el último registro de la BD con el ID
+if (isset($_POST['eliminar_ultimo']) && isset($_POST['registro_id'])) { 
+    $id = (int) $_POST['registro_id'];
+
+    $sqlDelete = "DELETE FROM resultados WHERE id = $id LIMIT 1"; //Límite de deletes
+
+    if ($conn->query($sqlDelete)) {
+        // Redirige al formulario después de eliminar
+        header("Location: index.php?p=formulario"); //Si elimina el registro, redirige
+        exit;
     } else {
-        echo "Error al eliminar: " . $conn->error;
+        echo "<p style='color:red;'>❌ Error al eliminar: " . $conn->error . "</p>"; //Si no logra eliminar el registro, muestra el error
+        exit;
     }
-}
-
-$conn->close();
+} 
 
 include("views/_encabezado.php"); //Agrega el encabezado del layout
 
@@ -39,8 +34,7 @@ foreach ($campos as $c) {
     }
 }
 
-if (count($faltan) > 0) {
-
+if (count($faltan) > 0) { //Si faltan datos que completar muestra el mensaje
     echo "<div class='alerta' style='
         background-color: #f8d7da;
         color: #721c24;
@@ -56,7 +50,7 @@ if (count($faltan) > 0) {
     </div>
     <div class='button'>
         <a href='?p=formulario' style='
-            width: 10%
+            width: 10%;
             display: inline-block;
             margin-top: 10px;
             padding: 8px 15px;
@@ -66,17 +60,14 @@ if (count($faltan) > 0) {
             border-radius: 4px;
         '>Volver</a>
     </div>";
-
     exit;
 }
 
-
 echo "Gracias por contestar la encuesta.<br><br>";
 
-foreach ($campos as $campo) {
+foreach ($campos as $campo) { //Muestra los campos faltantes
     $valor = trim($_POST[$campo] ?? '');
     $valores[$campo] = $valor;
-
     if ($valor === '') {
         $errores[$campo] = "El campo '$campo' es obligatorio.";
     }
@@ -85,7 +76,7 @@ foreach ($campos as $campo) {
 if (!empty($errores)) {
     include 'index.php';
     exit;
-}
+} 
 
 // Verifica si falta algún dato
 foreach ($campos as $campo) {
@@ -95,7 +86,7 @@ foreach ($campos as $campo) {
     }
 }
 
-// Determina el resultado
+// Determina el resultado entre los 4 posibles
 $resultadoFinal = "0";
 
 if (
@@ -133,15 +124,14 @@ if (
     $resultadoFinal = "4";
 }
 
-// Validación final para no guardar si falta info crítica
+// Validación final
 if (
     empty($_POST["nombre"]) ||
     empty($_POST["apellido"]) ||
     empty($resultadoFinal) ||
     $resultadoFinal === "Datos incompletos"
 ) {
-    echo "
-    <div class='alerta' style='
+    echo "<div class='alerta' style='
         background-color: #f8d7da;
         color: #721c24;
         padding: 15px;
@@ -152,53 +142,38 @@ if (
         max-width: 500px;
     '>
         ⚠️ No se guardaron los datos porque falta información válida. <br> Por favor completá todos los campos obligatorios.
-    </div>
-    <div class='button'>
-        <a href='?p=formulario' style='
-            width: 10%
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 15px;
-            background-color: #dc3545;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        '>Volver</a>
     </div>";
-
     exit;
 }
 
-// INSERTA en la base de datos
+// Insertar en la BD
 $nombre = $conn->real_escape_string($_POST["nombre"]);
 $apellido = $conn->real_escape_string($_POST["apellido"]);
-$resultadoFinal = $conn->real_escape_string($resultadoFinal);
+$resultadoFinal = (int)$resultadoFinal;
 
-$sqlInsert = "INSERT INTO `Resultados` (`nombre`, `apellido`, `Resultado`) VALUES ('$nombre', '$apellido', '$resultadoFinal')";
+$sqlInsert = "INSERT INTO `resultados` (`nombre`, `apellido`, `Resultado`) VALUES ('$nombre', '$apellido', $resultadoFinal)";
+
 if ($conn->query($sqlInsert)) {
+    $inserted_id = $conn->insert_id; // Se obtiene después del INSERT exitoso
     echo "<p style='color: green;'>✅ Datos guardados correctamente.</p>";
 } else {
     echo "<p style='color: red;'>❌ Error al guardar los datos: " . $conn->error . "</p>";
 }
 
-// MOSTRAR TODOS LOS RESULTADOS AL FINAL
-$sql = "SELECT * FROM Resultados";
-$resultado = $conn->query($sql);  //Quitar que muestre los resultados
 
-// Calcular porcentaje de coincidencia
-$sqlTotal = "SELECT COUNT(*) AS total FROM Resultados";
-$sqlCoinciden = "SELECT COUNT(*) AS coincidencias FROM Resultados WHERE Resultado = '$resultadoFinal'";
+// Calcular porcentaje de personas con el mismo resultado
+$sqlTotal = "SELECT COUNT(*) AS total FROM resultados";
+$sqlCoinciden = "SELECT COUNT(*) AS coincidencias FROM resultados WHERE Resultado = $resultadoFinal";
 
 $resultTotal = $conn->query($sqlTotal);
 $resultCoinciden = $conn->query($sqlCoinciden);
 
 if ($resultTotal && $resultCoinciden) {
-    $total = $resultTotal->fetch_assoc()["total"];
+    $total = $resultTotal->fetch_assoc()["total"]; //Busca las coincidencias en los resultados
     $coinciden = $resultCoinciden->fetch_assoc()["coincidencias"];
 
     if ($total > 0) {
-        $porcentaje = round(($coinciden / $total) * 100, 2);
-
+        $porcentaje = round(($coinciden / $total) * 100, 2); //Calcula el porcentaje
         echo "<div style='
             background-color: #d1ecf1;
             color: #0c5460;
@@ -213,29 +188,33 @@ if ($resultTotal && $resultCoinciden) {
     }
 }
 
-if ($resultado && $resultado->num_rows > 0) {
-    echo "<hr><h3>Respuestas almacenadas:</h3>";
-    while ($fila = $resultado->fetch_assoc()) {
-        echo "Nombre: " . $fila["nombre"] . "<br>";
-        echo "Apellido: " . $fila["apellido"] . "<br>";
-        echo "Resultado: " . $fila["Resultado"] . "<br><br>";
-    }
-} else {
-    echo "No se encontraron resultados.";
-}
-
+//Botón para volver al inicio
 echo "<br><div class='button'>
-        <a href='index.php' style='
-            width: 10%
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 15px;
-            background-color: #dc3545;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        '>Volver</a>
-    </div>";
+    <a href='index.php' style='
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+    '>Volver</a>
+   
+</div>";
 
-include("views/_pie_de_pagina.php");//Agrega el footer del layout
+//Botón para eliminar el registro
+echo "<form method='post' action='recibe_form.php'>
+    <input type='hidden' name='registro_id' value='$inserted_id'>
+    <button type='submit' name='eliminar_ultimo' style='
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    '>Eliminar mi respuesta y volver a completar</button>
+</form>";
+
+include("views/_pie_de_pagina.php"); // Footer
 ?>

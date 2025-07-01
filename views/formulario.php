@@ -1,7 +1,7 @@
 
     <h2>Contesta esta encuesta para obtener los mejores ringtones personalizados!</h2>
 
-    <form action="recibe_form.php" method="POST" novalidate>
+    <form class="form" action="recibe_form.php" method="POST" novalidate>
             <div>
                 <label for="nombre">Su nombre:</label><br>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingresá Tu Nombre" required>
@@ -115,6 +115,5 @@
      </form> -->
 
         <input type="submit" name="submit" value="Enviar">
- 
-        <input type="submit" name="delete_last" value="Eliminar última entrada" style="background:red; color:white;">
+        
 </form>

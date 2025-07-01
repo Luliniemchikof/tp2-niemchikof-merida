@@ -85,7 +85,7 @@ h2{
     color: rgb(78, 195, 224);
     margin: 1em;
 }
-form{
+.form{
     background-color: rgb(131, 248, 242);
     width: 60%;
     align-self: center;
@@ -95,7 +95,7 @@ form{
     padding: 2.5em;
     border: .2em solid rgb(230, 227, 95);
 }
-form div{
+.form div{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -148,7 +148,7 @@ a:active{
         background-size: cover;
         background-position: 30%;
     }
-    form{
+    .form{
         background-color: rgb(246, 248, 131);
         width: 90%;
         padding: 1em;
