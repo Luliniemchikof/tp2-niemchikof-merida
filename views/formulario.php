@@ -111,5 +111,10 @@
 
            <hr>
 
-        <input id="enviarButton" type="submit" name="boton_enviar" value="ENVIAR">
-     </form>
+       <!-- <input id="enviarButton" type="submit" name="boton_enviar" value="ENVIAR">
+     </form> -->
+
+        <input type="submit" name="submit" value="Enviar">
+ 
+        <input type="submit" name="delete_last" value="Eliminar última entrada" style="background:red; color:white;">
+</form>
